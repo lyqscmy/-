@@ -30,11 +30,11 @@
     <div id="container"></div>
     <script type="text/javascript">
         var map = new BMap.Map("container");          // 创建地图实例
-        map.centerAndZoom('武汉市', 7);
+        map.centerAndZoom('成都市', 7);
         var geo = new BMap.Geocoder();
 
-        var s1 = { name: '李勇强', addr: '深圳市福田区', city: '深圳市', phone: '110' };
-        var s2 = { name: '五件林', addr: '成都市武侯区', city: '成都市', phone: '120' };
+        var s1 = { name: '李勇强', addr: '重庆市沙坪坝', city: '重庆市', phone: '110' };
+        var s2 = { name: '小毛驴', addr: '成都市武侯区', city: '成都市', phone: '120' };
         var students = [s1, s2];
 
         students.forEach(function (student) {
@@ -69,6 +69,7 @@
                             </tr>
                         </table>
                         <img  id='imgDemo' 
+                            style="width: 50%; height: 50%"
                          src='http://img5.mtime.cn/ph/2016/11/14/111046.75660912_290X440X4.jpg' 
                          />`;
             return sContent;
