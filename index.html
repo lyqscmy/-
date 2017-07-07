@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Hello, World</title>
+    <style type="text/css">
+        html {
+            height: 100%
+        }
+
+        body {
+            height: 100%;
+            margin: 0px;
+            padding: 0px
+        }
+
+        #container {
+            height: 100%
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=m3t9CkUBWS7dGCiIAZgPNDEmCiOVh3S2">
+        //v2.0版本的引用方式：src="http://api.map.baidu.com/api?v=2.0&ak=您的密钥"
+//v1.4版本及以前版本的引用方式：src="http://api.map.baidu.com/api?v=1.4&key=您的密钥&callback=initialize"
+    </script>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script type="text/javascript">
+        var map = new BMap.Map("container");          // 创建地图实例
+        map.centerAndZoom('武汉市', 7);
+        var geo = new BMap.Geocoder();
+
+        var s1 = { name: '李勇强', addr: '深圳市福田区', city: '深圳市', phone: '110' };
+        var s2 = { name: '五件林', addr: '成都市武侯区', city: '成都市', phone: '120' };
+        var students = [s1, s2];
+
+        students.forEach(function (student) {
+            geo.getPoint(student.addr, function (point) {
+                if (point) {
+                    var marker = new BMap.Marker(point);
+                    var infoWindow = new BMap.InfoWindow(show(student));  // 创建信息窗口对象
+                    marker.addEventListener("click", function () {
+                        this.openInfoWindow(infoWindow);
+                        //图片加载完毕重绘infowindow
+                        document.getElementById('imgDemo').onload = function () {
+                            infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+                        }
+                    });
+                    map.addOverlay(marker);
+                }
+            })
+        });
+
+
+
+        map.addControl(new BMap.NavigationControl());
+
+        function show(student) {
+            var sContent =
+                        `<table>
+                            <tr>
+                                <td>${student.name}</td>
+                            </tr>
+                            <tr>
+                                <td>${student.phone}</td>
+                            </tr>
+                        </table>
+                        <img  id='imgDemo' 
+                         src='http://img5.mtime.cn/ph/2016/11/14/111046.75660912_290X440X4.jpg' 
+                         />`;
+            return sContent;
+        }
+    </script>
+</body>
+
+</html>
