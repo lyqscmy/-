@@ -479,10 +479,11 @@
 
         var marker = new BMap.Marker(defaultPoint);
         students.forEach(function (student) {
+            if (student["常驻地"] == '成都') console.log(student['姓名']);
             geo.getPoint(student["常驻地"], function (point) {
                 if (point) {
+                    point = addRandom(point);
                     marker = new BMap.Marker(point);
-
                     map.addOverlay(marker);
                 } else {
                     marker = new BMap.Marker(defaultPoint);
@@ -502,6 +503,11 @@
 
         map.addControl(new BMap.NavigationControl());
 
+        function addRandom(point) {
+            point.lng += Math.random()*0.1;
+            point.lat += Math.random()*0.1;
+            return point;
+        }
         function show(student) {
             var sContent =
                 `<table>
