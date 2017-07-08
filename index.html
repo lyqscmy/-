@@ -24,6 +24,18 @@
         //v2.0版本的引用方式：src="http://api.map.baidu.com/api?v=2.0&ak=您的密钥"
 //v1.4版本及以前版本的引用方式：src="http://api.map.baidu.com/api?v=1.4&key=您的密钥&callback=initialize"
     </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)        
+}, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-102189154-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
 </head>
 
 <body>
@@ -504,8 +516,8 @@
         map.addControl(new BMap.NavigationControl());
 
         function addRandom(point) {
-            point.lng += Math.random()*0.1;
-            point.lat += Math.random()*0.1;
+            point.lng += Math.random() * 0.1;
+            point.lat += Math.random() * 0.1;
             return point;
         }
         function show(student) {
